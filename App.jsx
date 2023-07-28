@@ -1,6 +1,7 @@
 import React from "react";
 import HomePreview from "./components/HomePreview";
 import ShowPreview from "./components/ShowPreview";
+import AudioPlayer from "./components/AudioPlayer";
 
 function App(){
   const [homePreviewData, sethomePreviewData] = React.useState([])
@@ -52,6 +53,7 @@ function App(){
         data={ShowData}
       />
       {homePreview}
+      <AudioPlayer/>
     </div>
   )
 }
