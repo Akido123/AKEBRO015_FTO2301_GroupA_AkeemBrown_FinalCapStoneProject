@@ -48,9 +48,9 @@ function App(){
   
   return(
     <div>
-      {/* <ShowPreview
+      <ShowPreview
         data={ShowData}
-      /> */}
+      />
       {homePreview}
     </div>
   )
