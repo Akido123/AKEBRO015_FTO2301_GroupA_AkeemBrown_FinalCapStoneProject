@@ -4,14 +4,21 @@ import ShowPreview from "./components/ShowPreview";
 import AudioPlayer from "./components/AudioPlayer";
 
 function App(){
+  /* ---States--- */
   const [homePreviewData, sethomePreviewData] = React.useState([])
   const [showPreviewData, setShowPreview] = React.useState("5679")
-  const [ShowData, setShowData] = React.useState('')
+  const [ShowData, setShowData] = React.useState({
+    "id": "10716",
+    "title": "Something Was Wrong",
+    "description": "Something Was Wrong is an Iris Award-winning true-crime docuseries about the discovery, trauma, and recovery from shocking life events and abusive relationships.",
+    "seasons": []
+  })
 
   function handleshowPreview(param){
     setShowPreview(param)
   }
 
+  /* ---API calls--- */
   React.useEffect(() => {
     fetch('https://podcast-api.netlify.app/shows')
       .then((response => {
@@ -36,6 +43,7 @@ function App(){
       .then((data) => setShowData(data));
   }, [showPreviewData])
 
+  /* ---Mapped Variables--- */
   const homePreview = homePreviewData.map(item => {
     return(
       <HomePreview
@@ -46,14 +54,14 @@ function App(){
     )
   })
 
-  
+  /* ---DOM--- */
   return(
     <div>
       <ShowPreview
-        data={ShowData}
+        show={ShowData}
       />
       {homePreview}
-      <AudioPlayer/>
+      {/* <AudioPlayer/> */}
     </div>
   )
 }

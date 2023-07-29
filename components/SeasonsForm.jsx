@@ -1,18 +1,15 @@
 import React from "react";
-import { FormControl, InputLabel, Select, MenuItem, OutlinedInput } from "@mui/material";
-
+import { FormControl, InputLabel, Select, OutlinedInput, MenuItem} from '@mui/material'
 
 function SeasonsForm(props) {
-  let names = [props.seasons]
-
-  const [personName, setPersonName] = React.useState([]);
+  const [seasonsNumber, setseasonsNumber] = React.useState([]);
 
   const handleChange = (event) => {
     const {
       target: { value },
     } = event;
-    setPersonName(
-      typeof value === 'string' ? value.split(',') : value,
+    setseasonsNumber(
+      typeof value === 'number' ? value.split(',') : value,
     );
   };
 
@@ -24,22 +21,22 @@ function SeasonsForm(props) {
           labelId="demo-multiple-name-label"
           id="demo-multiple-name"
           multiple
-          value={personName}
+          value={seasonsNumber}
           onChange={handleChange}
           input={<OutlinedInput label="Name" />}
         >
-          {names.map((name) => (
+          {props.seasons.seasons.map((item) => (
             <MenuItem
-              key={name}
-              value={name}
+              key={item.title}
+              value={item.season}
             >
-              {name}
+              {item.season}
             </MenuItem>
           ))}
         </Select>
       </FormControl>
     </div>
   );
-}
+} 
 
 export default SeasonsForm

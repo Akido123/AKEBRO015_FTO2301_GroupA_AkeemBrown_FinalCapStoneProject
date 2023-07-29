@@ -3,13 +3,12 @@ import React from 'react';
 import genreTitles from '../data/genreTitles';
 
 function HomePreview(props){
-
   const { showFunc } = props
   
-    function handleClick(){
-      showFunc(props.item.id)
-    }
-
+  function handleClick(){
+    showFunc(props.item.id)
+  }
+  
   const dateString = props.item.updated
   const dateObject = new Date(dateString);
   const options = { year: 'numeric', month: 'long', day: 'numeric'};

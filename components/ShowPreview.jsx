@@ -4,12 +4,10 @@ import EpisodeTemplate from "./EpisodesTemplate"
 import SeasonsForm from "./SeasonsForm"
 
 function ShowPreview(props){
-  
-
-  // const episodes = data.seasons[0].episodes.map(item => {
+  // const episodes = show.seasons[0].episodes.map(item => {
   //   return(
   //     <EpisodeTemplate
-  //       key={data.id}
+  //       key={show.id}
   //       item={item}
   //     />
   //   )
@@ -24,7 +22,7 @@ function ShowPreview(props){
         >
         <CardMedia
           component='img'
-          image={props.data.image}
+          image={props.show.image}
           sx={{
             width: '300px',
             height: '300px',
@@ -32,10 +30,10 @@ function ShowPreview(props){
           }}
           />
         <SeasonsForm
-        seasons={props.data.seasons}
+          seasons={props.show}
         />
         <Typography>
-          {props.data.description}
+          {props.show.description}
         </Typography>
         {/* {episodes} */}
       </Card>
