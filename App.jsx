@@ -3,6 +3,7 @@ import HomePreview from "./components/HomePreview";
 import ShowPreview from "./components/ShowPreview";
 import AudioPlayer from "./components/AudioPlayer";
 import CarosoulePage from "./components/CarosoulePage";
+import episodesData from "./data/episodesData";
 
 function App(){
 
@@ -17,7 +18,7 @@ function App(){
   })
   const [songs, setSongs] = React.useState()
   const [isplaying, setIsplaying] = React.useState(false)
-  const [current, setCurrentSong] = React.useState(episodesData.seasons[0].episodes[0].file)
+  const [currentSong, setCurrentSong] = React.useState(episodesData.seasons[0].episodes[0])
   
   /* ---Functions ---*/
   function handleshowPreview(param){
@@ -70,24 +71,31 @@ function App(){
     }
   }, [isplaying])
 
+  const onPlaying = () => {
+    const duration = audioElem.current.duration;
+    const ct = audioElem.current.currentTime;
+
+    setCurrentSong({...currentSong, "progress":ct / duration * 100, "length": duration})
+  }
+
   /* ---DOM--- */
   return(
     <div>
-      {/* <CarosoulePage/> */}
-      {/* <ShowPreview
-        show={ShowData}
-      />
-      {homePreview} */}
+      <CarosoulePage/>
       <div>
-        <audio src="https://podcast-api.netlify.app/placeholder-audio.mp3" ref=
-        {audioElem}/>
+        <audio src={currentSong.file} ref={audioElem} onTimeUpdate={onPlaying}/>
         <AudioPlayer
          songs={songs} 
          setSongs={setSongs} 
          isplaying={isplaying} 
          setisplaying={setIsplaying}
-         audioElem={audioElem}/>
+         audioElem={audioElem}
+         currentSong={currentSong}/>
       </div>
+      <ShowPreview
+        show={ShowData}
+      />
+      {homePreview}
     </div>
   )
 }

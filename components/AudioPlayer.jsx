@@ -1,23 +1,21 @@
-import React from 'react';
 import SkipPreviousIcon from '@mui/icons-material/SkipPrevious';
 import PlayArrowIcon from '@mui/icons-material/PlayArrow';
 import PauseCircleIcon from '@mui/icons-material/PauseCircle';
 import SkipNextIcon from '@mui/icons-material/SkipNext';
-import { Box, Card, CardContent, CardMedia, IconButton, Typography } from '@mui/material'
-import episodesData from '../data/episodesData';
+import { Box, Card, CardContent, CardMedia, IconButton, Typography, Stack, Slider } from '@mui/material'
 
-export default function AudioPlayer({audioElem, isplaying, setisplaying}) {
+export default function AudioPlayer({audioElem, isplaying, setisplaying, currentSong}) {
   function PlayPause(){ 
     setisplaying(!isplaying)
   }
 
-
   return (
     <Card>
+      <Slider defaultValue={30} aria-label="Disabled slider" />
       <Box>
         <CardContent>
           <Typography component="div" variant="h5">
-            Live From Space
+            {currentSong.title}
           </Typography>
           <Typography variant="subtitle1" color="text.secondary" component="div">
             Mac Miller
