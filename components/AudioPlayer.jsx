@@ -1,18 +1,15 @@
 import React from 'react';
 import SkipPreviousIcon from '@mui/icons-material/SkipPrevious';
 import PlayArrowIcon from '@mui/icons-material/PlayArrow';
+import PauseCircleIcon from '@mui/icons-material/PauseCircle';
 import SkipNextIcon from '@mui/icons-material/SkipNext';
-import episodesData from '../data/episodesData';
 import { Box, Card, CardContent, CardMedia, IconButton, Typography } from '@mui/material'
+import episodesData from '../data/episodesData';
 
-export default function AudioPlayer() {
-  const {seasons} = episodesData
-  const audio = seasons[0].episodes[0].file
-  const image = seasons[0].image
-
-  const [songs, setSongs] = React.useState(audio)
-  const [isPlaying, setIsplaying] = React.useState(false)
-  const [current, setCurrentSong] = React.useState(audio)
+export default function AudioPlayer({audioElem, isplaying, setisplaying}) {
+  function PlayPause(){ 
+    setisplaying(!isplaying)
+  }
 
 
   return (
@@ -30,19 +27,14 @@ export default function AudioPlayer() {
           <IconButton aria-label="previous">
             <SkipPreviousIcon />
           </IconButton>
-          <IconButton aria-label="play/pause">
-            <PlayArrowIcon/>
+          <IconButton aria-label="play/pause" onClick={PlayPause}>
+            {isplaying ? <PauseCircleIcon/> : <PlayArrowIcon/>}
           </IconButton>
           <IconButton aria-label="next">
-            <SkipNextIcon />
+            <SkipNextIcon/>
           </IconButton>
         </Box>
       </Box>
-      <CardMedia
-        component="img"
-        sx={{ width: 151 }}
-        image={image}
-      />
     </Card>
   );
 }
