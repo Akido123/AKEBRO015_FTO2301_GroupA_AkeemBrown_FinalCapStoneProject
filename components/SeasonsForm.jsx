@@ -2,6 +2,7 @@ import React from "react";
 import { FormControl, InputLabel, Select, OutlinedInput, MenuItem} from '@mui/material'
 
 function SeasonsForm(props) {
+  const {seasonsFunc} = props
   const [seasonsNumber, setseasonsNumber] = React.useState([]);
 
   const handleChange = (event) => {
@@ -10,6 +11,7 @@ function SeasonsForm(props) {
     } = event;
     setseasonsNumber(
       typeof value === 'number' ? value.split(',') : value,
+      seasonsFunc(value)
     );
   };
 

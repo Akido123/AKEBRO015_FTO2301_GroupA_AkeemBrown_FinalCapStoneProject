@@ -4,14 +4,30 @@ import EpisodeTemplate from "./EpisodesTemplate"
 import SeasonsForm from "./SeasonsForm"
 
 function ShowPreview(props){
-  // const episodes = show.seasons[0].episodes.map(item => {
-  //   return(
-  //     <EpisodeTemplate
-  //       key={show.id}
-  //       item={item}
-  //     />
-  //   )
-  // })
+  const [seasonNumber, setSeasonNumber] = React.useState([1])
+
+  function handleSeasonNumber(param){
+    setSeasonNumber(param)
+  }
+
+  React.useEffect(() => {
+    props.show.seasons.map(item => {
+      console.log(item)
+      item.episodes.map(item => {
+        console.log(item)
+      })
+    })
+  }, [props.show])
+
+  const episodes = props.show.seasons.map(item => {
+    return(
+      <EpisodeTemplate
+        key={item.id}
+        item={item}
+        seasonNum={seasonNumber}
+      />
+    )
+  })
 
   return(
     <Paper variant="elevation" elevation={3}>
@@ -31,11 +47,12 @@ function ShowPreview(props){
           />
         <SeasonsForm
           seasons={props.show}
+          seasonsFunc={handleSeasonNumber}
         />
         <Typography>
           {props.show.description}
         </Typography>
-        {/* {episodes} */}
+        {episodes}
       </Card>
     </Paper>
   )
