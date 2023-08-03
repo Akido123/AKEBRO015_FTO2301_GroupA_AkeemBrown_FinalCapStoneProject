@@ -1,21 +1,36 @@
+import { Route, Routes } from "react-router-dom"
 import React, { useRef } from "react";
 import HomePreview from "./components/HomePreview";
 import ShowPreview from "./components/ShowPreview";
 import AudioPlayer from "./components/AudioPlayer";
 import CarosoulePage from "./components/CarosoulePage";
 import episodesData from "./data/episodesData";
+import ClipLoader from "react-spinners/ClipLoader";
 
 function App(){
 
   /* ---States--- */
   const [homePreviewData, sethomePreviewData] = React.useState([])
-  const [showPreviewData, setShowPreview] = React.useState("5679")
+  const [showPreviewData, setShowPreview] = React.useState()
   const [ShowData, setShowData] = React.useState({
-    "id": "10716",
-    "title": "Something Was Wrong",
-    "description": "Something Was Wrong is an Iris Award-winning true-crime docuseries about the discovery, trauma, and recovery from shocking life events and abusive relationships.",
-    "seasons": []
+    "id": "",
+    "title": "",
+    "description": "",
+    "seasons": [{
+      "season": 0,
+      "title": "",
+      "image": "",
+      "episodes": [{
+        "title": "",
+        "description": "",
+        "episode": 1,
+        "file": ""
+      }]
+    }]
   })
+  const [isLoading, setIsLoading] = React.useState(false)
+
+  
   const [songs, setSongs] = React.useState()
   const [isplaying, setIsplaying] = React.useState(false)
   const [currentSong, setCurrentSong] = React.useState(episodesData.seasons[0].episodes[0])
@@ -30,19 +45,24 @@ function App(){
     fetch('https://podcast-api.netlify.app/shows')
       .then((response => {
       if(!response.ok) {
-        throw new Error("Somethinf went wrong. Try again in a couple minutes");
+        throw new Error("Something went wrong. Try again in a couple minutes");
       }
       return response
     }))
       .then(response => response.json())
-      .then((data) => sethomePreviewData(data));
+      .then((data) => {
+        sethomePreviewData(data)
+        setTimeout(() => {
+          setIsLoading(true)
+        }, 2000)
+      });
   })
 
   React.useEffect(() => {
     fetch(`https://podcast-api.netlify.app/id/${showPreviewData}`)
       .then((response => {
       if(!response.ok) {
-        throw new Error("Somethinf went wrong. Try again in a couple minutes");
+        throw new Error("Somethingg went wrong. Try again in a couple minutes");
       }
       return response
       }))
@@ -61,27 +81,27 @@ function App(){
     )
   })
 
-  const audioElem = useRef();
+  // const audioElem = useRef();
 
-  React.useEffect(() => {
-    if(isplaying){
-      audioElem.current.play()
-    }else{
-      audioElem.current.pause()
-    }
-  }, [isplaying])
+  // React.useEffect(() => {
+  //   if(isplaying){
+  //     audioElem.current.play()
+  //   }else{
+  //     audioElem.current.pause()
+  //   }
+  // }, [isplaying])
 
-  const onPlaying = () => {
-    const duration = audioElem.current.duration;
-    const ct = audioElem.current.currentTime;
+  // const onPlaying = () => {
+  //   const duration = audioElem.current.duration;
+  //   const ct = audioElem.current.currentTime;
 
-    setCurrentSong({...currentSong, "progress":ct / duration * 100, "length": duration})
-  }
+  //   setCurrentSong({...currentSong, "progress":ct / duration * 100, "length": duration})
+  // }
 
   /* ---DOM--- */
   return(
     <div>
-      <CarosoulePage/>
+      {/* <CarosoulePage/>
       <div>
         <audio src={currentSong.file} ref={audioElem} onTimeUpdate={onPlaying}/>
         <AudioPlayer
@@ -94,8 +114,14 @@ function App(){
       </div>
       <ShowPreview
         show={ShowData}
-      />
-      {homePreview}
+      /> */}
+      {!isLoading ? (<ClipLoader
+        color={"#F37A42"}
+        loading={!isLoading}
+        size={150}
+        aria-label="Loading Spinner"
+        data-testid="loader"
+      />) : homePreview}
     </div>
   )
 }

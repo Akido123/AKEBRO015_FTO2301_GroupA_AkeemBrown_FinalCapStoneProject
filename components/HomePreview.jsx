@@ -8,6 +8,15 @@ function HomePreview(props){
   function handleClick(){
     showFunc(props.item.id)
   }
+
+  const genreID =
+    props.item.genres.map((number) => {
+      for(const [key, value] of Object.entries(genreTitles)){
+        if(number === parseInt(key)){
+          return value + " "
+        }
+      }
+    })
   
   const dateString = props.item.updated
   const dateObject = new Date(dateString);
@@ -36,7 +45,7 @@ function HomePreview(props){
         Updated: {readableDate}
       </Typography>
       <Typography variant="body2">
-        {props.item.genres}
+        {genreID}
       </Typography>
     </CardContent>
     </CardActionArea>

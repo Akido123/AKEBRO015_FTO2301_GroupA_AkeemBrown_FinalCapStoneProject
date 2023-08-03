@@ -1,5 +1,5 @@
 import React from "react";
-import { FormControl, InputLabel, Select, OutlinedInput, MenuItem} from '@mui/material'
+import { FormControl, InputLabel, Select, OutlinedInput, MenuItem, Typography} from '@mui/material'
 
 function SeasonsForm(props) {
   const {seasonsFunc} = props
@@ -9,10 +9,8 @@ function SeasonsForm(props) {
     const {
       target: { value },
     } = event;
-    setseasonsNumber(
-      typeof value === 'number' ? value.split(',') : value,
-      seasonsFunc(value)
-    );
+    seasonsFunc(value)
+    // setseasonsNumber(value); - value will append to selected the menu list and clicking the last item will crash the system.
   };
 
   return (
