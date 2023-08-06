@@ -6,9 +6,15 @@ import SeasonsForm from "./SeasonsForm"
 function ShowPreview(props){
   const [seasonNumber, setSeasonNumber] = React.useState([0])
   const [episodeNumber, setEpisodeNumber] = React.useState([])
+  
+  const {handleEpisode} = props
 
   function handleSeasonNumber(param){
     setSeasonNumber(param)
+  }
+
+  function episodeFunc(param){
+    handleEpisode(param)
   }
 
   const episodes = props.show.seasons[seasonNumber].episodes.map(item => {
@@ -16,6 +22,7 @@ function ShowPreview(props){
       <EpisodeTemplate
         key={item.id}
         item={item}
+        handleEpisode={episodeFunc}
       />
     )
   })
@@ -35,7 +42,7 @@ function ShowPreview(props){
             height: '300px',
             justifyContent: 'center'
           }}
-          />
+        />
         <SeasonsForm
           seasons={props.show}
           seasonsFunc={handleSeasonNumber}

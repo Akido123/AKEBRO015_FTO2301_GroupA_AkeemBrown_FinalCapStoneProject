@@ -16,6 +16,12 @@ function EpisodeTemplate(props){
   }
   const stared = isFav.fav ? <Star/> : <StarBorder/> 
 
+  const {handleEpisode} = props
+
+  function handleClick(){
+    handleEpisode(props.item)
+  }
+
   return (
     <Card sx={{ maxWidth: 345 }}>
       <CardActionArea>
@@ -32,7 +38,7 @@ function EpisodeTemplate(props){
         <div onClick={handleClick}>
           {stared}
         </div>
-        <Button size="small" color="primary">
+        <Button size="small" color="primary" onClick={handleClick}>
           Play
         </Button>
       </CardActions>

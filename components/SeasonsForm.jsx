@@ -1,5 +1,5 @@
 import React from "react";
-import { FormControl, InputLabel, Select, OutlinedInput, MenuItem, Typography} from '@mui/material'
+import { FormControl, InputLabel, Select, OutlinedInput, MenuItem, Typography, CardMedia} from '@mui/material'
 
 function SeasonsForm(props) {
   const {seasonsFunc} = props
@@ -26,12 +26,23 @@ function SeasonsForm(props) {
           input={<OutlinedInput label="Name" />}
         >
           {props.seasons.seasons.map((item) => (
-            <MenuItem
-              key={item.title}
-              value={item.season}
-            >
-              {item.season}
-            </MenuItem>
+            <div key={item.season}>
+              <MenuItem
+                key={item.title}
+                value={item.season}
+              >
+                Season: {item.season} Episodes: {item.episodes.length}
+              </MenuItem>
+              <CardMedia
+                component='img'
+                image={item.image}
+                sx={{
+                  width: '50px',
+                  height: '50px',
+                  justifyContent: 'center'
+                }}
+              />
+            </div>
           ))}
         </Select>
       </FormControl>

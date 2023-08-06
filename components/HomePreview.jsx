@@ -1,14 +1,19 @@
 import {Card, Typography, CardContent, CardActionArea, CardMedia} from '@mui/material';
-import React from 'react';
 import genreTitles from '../data/genreTitles';
+import React from 'react';
 
 function HomePreview(props){
-  const { showFunc } = props
+  /* ---States--- */
   
+  
+  /* ---Functions--- */
+  const { showFunc } = props
+
   function handleClick(){
     showFunc(props.item.id)
   }
 
+  /* ---Variables--- */
   const genreID =
     props.item.genres.map((number) => {
       for(const [key, value] of Object.entries(genreTitles)){
