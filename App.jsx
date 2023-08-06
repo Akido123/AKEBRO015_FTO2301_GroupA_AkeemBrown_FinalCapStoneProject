@@ -1,4 +1,4 @@
-import { Route, Routes } from "react-router-dom"
+// import { BrowserRouter as Router, Route, Routes, Link, Switch } from "react-router-dom"
 import React, { useRef } from "react";
 import HomePreview from "./components/HomePreview";
 import ShowPreview from "./components/ShowPreview";
@@ -6,6 +6,7 @@ import AudioPlayer from "./components/AudioPlayer";
 import CarosoulePage from "./components/CarosoulePage";
 import episodesData from "./data/episodesData";
 import ClipLoader from "react-spinners/ClipLoader";
+import LoginPage from "./components/LoginPage";
 
 function App(){
 
@@ -81,27 +82,27 @@ function App(){
     )
   })
 
-  // const audioElem = useRef();
+  const audioElem = useRef();
 
-  // React.useEffect(() => {
-  //   if(isplaying){
-  //     audioElem.current.play()
-  //   }else{
-  //     audioElem.current.pause()
-  //   }
-  // }, [isplaying])
+  React.useEffect(() => {
+    if(isplaying){
+      audioElem.current.play()
+    }else{
+      audioElem.current.pause()
+    }
+  }, [isplaying])
 
-  // const onPlaying = () => {
-  //   const duration = audioElem.current.duration;
-  //   const ct = audioElem.current.currentTime;
+  const onPlaying = () => {
+    const duration = audioElem.current.duration;
+    const ct = audioElem.current.currentTime;
 
-  //   setCurrentSong({...currentSong, "progress":ct / duration * 100, "length": duration})
-  // }
+    setCurrentSong({...currentSong, "progress":ct / duration * 100, "length": duration})
+  }
 
   /* ---DOM--- */
   return(
     <div>
-      {/* <CarosoulePage/>
+      <CarosoulePage/>
       <div>
         <audio src={currentSong.file} ref={audioElem} onTimeUpdate={onPlaying}/>
         <AudioPlayer
@@ -110,11 +111,12 @@ function App(){
          isplaying={isplaying} 
          setisplaying={setIsplaying}
          audioElem={audioElem}
-         currentSong={currentSong}/>
+         currentSong={currentSong}
+         setCurrentSong={setCurrentSong}/>
       </div>
       <ShowPreview
         show={ShowData}
-      /> */}
+      />
       {!isLoading ? (<ClipLoader
         color={"#F37A42"}
         loading={!isLoading}
