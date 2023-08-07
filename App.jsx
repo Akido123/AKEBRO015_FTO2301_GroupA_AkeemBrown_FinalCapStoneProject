@@ -136,6 +136,7 @@ function App(){
   /* ---DOM--- */
   return(
     <div>
+      <LoginPage/>
       <CarosoulePage/>
       <div>
         <audio src={episodeData.file} ref={audioElem} onTimeUpdate={onPlaying}/>

@@ -1,5 +1,5 @@
 import React from "react";
-import { FormControl, InputLabel, Select, OutlinedInput, MenuItem, Typography, CardMedia} from '@mui/material'
+import { FormControl, InputLabel, Select, OutlinedInput, MenuItem, Typography, CardMedia, TextField} from '@mui/material'
 
 function SeasonsForm(props) {
   const {seasonsFunc} = props
@@ -15,6 +15,7 @@ function SeasonsForm(props) {
 
   return (
     <div>
+      <TextField id="outlined-basic" label="Outlined" variant="outlined" />
       <FormControl sx={{ m: 1, width: 300 }}>
         <InputLabel id="demo-multiple-name-label">Name</InputLabel>
         <Select
